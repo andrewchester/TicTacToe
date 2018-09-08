@@ -19,29 +19,43 @@ struct cell
 
 void printBoard(cell board[3][3])
 {
-  for(int i = 0; i < 3; i++)
+  cout << " 1 2 3 "<< endl;
+  for(int x = 0; x < 3; x++)
   {
-    char rowString[3];
-    for(int j = 0; j < 3; j++)
+    cout << (char)(97 + x) << " ";
+    for(int y = 0; y < 3; y++)
     {
-      strcat(rowString, iota(board[j][i].value));
-      strcat(rowString, " ");
+      if(board[x][y].value == 0)
+      {
+        cout << " ";
+      }
+      else if(board[x][y].value == 1)
+      {
+        cout << "X";
+      }
+      else if(board[x][y].value = 2)
+      {
+        cout << "O";
+      }
+      cout << " ";
     }
+    cout << endl;
   }
 }
 int main()
 {
   cell board[3][3];
 
-  for(int i = 0; i < 3; i++)
+  for(int x = 0; x < 3; x++)
   {
-    for(int j = 0; j < 3; j++)
+    for(int y = 0; y < 3; y++)
     {
-      board[j][i].xPos = j;
-      board[j][i].yPos = i;
-      board[j][i].value = 0;
+      board[x][y].xPos = x;
+      board[x][y].yPos = y;
+      board[x][y].value = 0;
     }
   }
+  printBoard(board);
   
   return 0;
 }
