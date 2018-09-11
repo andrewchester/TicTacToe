@@ -33,6 +33,120 @@ bool Board::spaceOccupied(int x, int y)
 		return true;
 	return false;
 }
+bool Board::testColumns()
+{
+	int xCount = 0;
+	int oCount = 0;
+
+	for(int row = 0; row < 3; row++)
+	{
+		xCount = 0;
+		oCount = 0;
+		for(int column = 0; column < 3; column++)
+		{
+			if((*board[row][column]).value == 1)
+			{
+				xCount++;
+			}
+			else if((*board[row][column]).value == 2)
+			{
+				oCount++;
+			}
+		}
+	}
+
+	if(xCount == 3 || oCount == 3)
+		return true;
+	return false;
+}
+bool Board::testRows()
+{
+	int xCount = 0;
+	int oCount = 0;
+
+	for(int column = 0; column < 3; column++)
+	{
+		xCount = 0;
+		oCount = 0;
+		for(int row = 0; row < 3; row++)
+		{
+			if((*board[row][column]).value == 1)
+			{
+				xCount++;
+			}
+			else if((*board[row][column]).value == 2)
+			{
+				oCount++;
+			}
+		}
+	}
+
+	if(xCount == 3 || oCount == 3)
+		return true;
+	return false;
+}
+bool Board::testDiags()
+{
+	int xCount = 0;
+	int oCount = 0;
+
+	for(int i = 0; i < 3; i++)
+	{
+		if((*board[i][i]).value == 1)
+			xCount++;
+		else if((*board[i][i]).value == 2)
+			oCount++;
+	}
+	if(xCount == 3 || oCount == 3)
+		return true;
+
+	xCount = 0;
+	oCount = 0;
+
+	if((*board[2][0]).value == 1)
+		xCount++;
+	else if((*board[2][0]).value == 2)
+		oCount++;
+
+	if((*board[2][2]).value == 1)
+		xCount++;
+	else if((*board[2][2]).value == 2)
+		oCount++;
+
+	if((*board[0][2]).value == 1)
+		xCount++;
+	else if((*board[0][2]).value == 2)
+		oCount++;
+
+	if(xCount == 3 || oCount == 3)
+		return true;
+
+	return false;
+}
+
+bool Board::testWin(bool* won, bool* turn)
+{
+	std::cout << "Running test win" << std::endl;
+	if(testColumns() || testRows() || testDiags())
+	{
+		if(*turn)
+			*won = true;
+		else
+			*won = false;
+		return true;
+	}
+}
+
+void Board::clear()
+{
+	for(int x = 0; x < 3; x++)
+	{
+		for(int y = 0; y < 3; y++)
+		{
+			(*board[x][y]).value = 0;
+		}
+	}
+}
 
 bool Board::isFull()
 {

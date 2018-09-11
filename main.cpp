@@ -10,12 +10,16 @@ int main()
   bool* turnP = &playerOneTurn;
   bool playing = true;
   bool* playingP = &playing;
+  bool playerWon = true;
+  bool* playerWonP = &playerWon;
 
   char choice[3];
+  char playAgain;
   int x, y;
 
   Board board;
 
+  GAME_START:
   while(playing)
   {
   	board.printBoard();
@@ -36,16 +40,37 @@ int main()
   	if(!board.spaceOccupied(x, y))
   	{
   		board.updateBoard(x, y, turnP);
+  		if(board.testWin(playerWonP, turnP))
+  			break;
+
+  		if(playerOneTurn)
+  			playerOneTurn = false;
+  		else
+  			playerOneTurn = true;
   	}
   	else
   	{
   		std::cout << "Space Occupied, please try again." << std::endl;
   		goto GET_INPUT;
   	}
-  	board.printBoard();
-
-  	break;
+  }
+  if(playerWon)
+  {
+  	std::cout << "Player 1 won!" << std::endl;
+  }
+  else
+  {
+  	std::cout << "Player 2 won!" << std::endl;
   }
 
+  std::cout << "Would you like to play again?(y or n): ";
+  std::cin >> playAgain;
+  if(playAgain == 'y')
+  {
+  	board.clear();
+  	cin.clear();
+  	cin.ignore(100, '\n');
+  	goto GAME_START;
+  }
   return 0;
 }
