@@ -41,7 +41,10 @@ int main()
   	{
   		board.updateBoard(x, y, turnP);
   		if(board.testWin(playerWonP, turnP))
+      {
+        board.printBoard();
   			break;
+      }
 
   		if(playerOneTurn)
   			playerOneTurn = false;

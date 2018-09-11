@@ -40,6 +40,8 @@ bool Board::testColumns()
 
 	for(int row = 0; row < 3; row++)
 	{
+		if(xCount == 3 || oCount == 3)
+			return true;
 		xCount = 0;
 		oCount = 0;
 		for(int column = 0; column < 3; column++)
@@ -54,9 +56,6 @@ bool Board::testColumns()
 			}
 		}
 	}
-
-	if(xCount == 3 || oCount == 3)
-		return true;
 	return false;
 }
 bool Board::testRows()
@@ -66,6 +65,8 @@ bool Board::testRows()
 
 	for(int column = 0; column < 3; column++)
 	{
+		if(xCount == 3 || oCount == 3)
+			return true;
 		xCount = 0;
 		oCount = 0;
 		for(int row = 0; row < 3; row++)
@@ -80,9 +81,6 @@ bool Board::testRows()
 			}
 		}
 	}
-
-	if(xCount == 3 || oCount == 3)
-		return true;
 	return false;
 }
 bool Board::testDiags()
@@ -126,7 +124,6 @@ bool Board::testDiags()
 
 bool Board::testWin(bool* won, bool* turn)
 {
-	std::cout << "Running test win" << std::endl;
 	if(testColumns() || testRows() || testDiags())
 	{
 		if(*turn)
