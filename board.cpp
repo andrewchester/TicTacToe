@@ -20,6 +20,36 @@ Board::Board()
 	}
 }
 
+void Board::updateBoard(int x, int y, bool* turn)
+{
+	if(*turn)
+		(*board[x][y]).value = 1;
+	else
+		(*board[x][y]).value = 2;
+}
+bool Board::spaceOccupied(int x, int y)
+{
+	if((*board[x][y]).value != 0)
+		return true;
+	return false;
+}
+
+bool Board::isFull()
+{
+	int count = 0;
+	for(int x = 0; x < 3; x++)
+	{
+		for(int y = 0; y < 3; y++)
+		{
+			if((*board[x][y]).value != 0)
+				count++;
+		}
+	}
+	if(count == 9)
+		return true;
+	return false;
+}
+
 void Board::printBoard()
 {
 	std::cout << "  1 2 3 "<< std::endl;
