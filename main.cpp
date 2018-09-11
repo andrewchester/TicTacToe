@@ -3,6 +3,7 @@
 * A text based tictactoe program with 2 players
 */
 #include <iostream>
+#include <string.h>
 
 #include "board.h"
 
@@ -17,7 +18,7 @@ int main()
   bool playerWon = true; //Boolean for which player won
   bool* playerWonP = &playerWon;
 
-  char choice[3]; //The choice of the player(a1, a2, etc)
+  char choice[100]; //The choice of the player(a1, a2, etc)
   char playAgain; //If they want to play again
   int x, y; //The x,y of their choice
   int xWins = 0, oWins = 0; //Number of wins by each player
@@ -34,9 +35,15 @@ int main()
   		std::cout << "Player 1 enter your choice(ex: a1): ";
   	else
   		std::cout << "Player 2 enter your choice(ex: a1): ";
-  	std::cin.get(choice, 3);
+  	std::cin.get(choice, 100);
   	std::cin.clear();
   	std::cin.ignore(100, '\n');
+
+    if(strlen(choice) != 2)
+    {
+      std::cout << "Improper input, please try again. " << std::endl;
+      goto GET_INPUT;
+    }
 
     //Set the x/y using the ascii character values of the first and second characters in their input
 	  x = ((int)choice[0] - 97);
@@ -58,7 +65,7 @@ int main()
         goto RESTART;
       }
       //If there wasn't a win, toggle the player's turn. We have to do this after testWin() otherwise we won't know who won
-  		if(playerOneTurn)
+  		if(playerOneTurn) 
   			playerOneTurn = false;
   		else
   			playerOneTurn = true;
