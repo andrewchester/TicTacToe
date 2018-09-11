@@ -51,6 +51,12 @@ int main()
         board.printBoard();
   			break;
       }
+      if(board.isFull()) //IF the board is full and they didn't win
+      {
+        board.printBoard(); //Print out the board and exit the loop
+        std::cout<< "It was a tie!" << endl;
+        goto RESTART;
+      }
       //If there wasn't a win, toggle the player's turn. We have to do this after testWin() otherwise we won't know who won
   		if(playerOneTurn)
   			playerOneTurn = false;
@@ -76,6 +82,7 @@ int main()
     oWins++;
     std::cout << "Player 2 has won " << oWins << " times!" << std::endl;
   }
+  RESTART:
   //Restarts the game if they want to play again
   std::cout << "Would you like to play again?(y or n): ";
   std::cin >> playAgain;
