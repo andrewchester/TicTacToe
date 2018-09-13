@@ -6,7 +6,7 @@
 //Cell struct for holding the values and positions of values
 struct Board::Cell{
   	int x, y, value;
-};	
+};
 //Constructor, initializes the board
 Board::Board()
 {
@@ -115,21 +115,40 @@ bool Board::testDiags()
 	xCount = 0; //Reset the counter variables
 	oCount = 0;
 
+  int i = 2; //Variables for counting x/y position and counting backwards from a3 to c1
+  int j = 0;
+
+  //While loop for going from a3 to c1
+  while(i >= 0 && j <= 2)
+  {
+    //Increment the xCount of oCount variables depending on the value of the cell
+    if((*board[i][j]).value == 1)
+  		xCount++;
+  	else if((*board[i][j]).value == 2)
+  		oCount++;
+
+    //Incerement the iterator variables, goes from (2,0) to (1,1) and then finally (0,2)
+    i--;
+    j++;
+  }
+  /*
 	//The next three if/else if statements are for testing each cell from top right to bottom left individually and incrementing the appropriate variables
-	if((*board[2][0]).value == 1)
+	if((*board[2][0]).value == 1) //a3
 		xCount++;
 	else if((*board[2][0]).value == 2)
 		oCount++;
 
-	if((*board[2][2]).value == 1)
+	if((*board[2][2]).value == 1) //b2
 		xCount++;
 	else if((*board[2][2]).value == 2)
 		oCount++;
 
-	if((*board[0][2]).value == 1)
+	if((*board[0][2]).value == 1) //c1
 		xCount++;
 	else if((*board[0][2]).value == 2)
 		oCount++;
+
+  */
 
 	//If there are there in a row of either x's or o's, return true
 	if(xCount == 3 || oCount == 3)
