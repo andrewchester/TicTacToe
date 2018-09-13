@@ -12,13 +12,13 @@ using namespace std;
 int main()
 {
   bool playerOneTurn = true; //Keep tracks of turns
-  bool* turnP = &playerOneTurn; 
+  bool* turnP = &playerOneTurn;
   bool playing = true; //Boolean for the while loop(although it just uses break anyways)
   bool* playingP = &playing;
   bool playerWon = true; //Boolean for which player won
   bool* playerWonP = &playerWon;
 
-  char choice[100]; //The choice of the player(a1, a2, etc)
+  char choice[3]; //The choice of the player(a1, a2, etc)
   char playAgain; //If they want to play again
   int x, y; //The x,y of their choice
   int xWins = 0, oWins = 0; //Number of wins by each player
@@ -35,7 +35,7 @@ int main()
   		std::cout << "Player 1 enter your choice(ex: a1): ";
   	else
   		std::cout << "Player 2 enter your choice(ex: a1): ";
-  	std::cin.get(choice, 100);
+  	std::cin.get(choice, 3);
   	std::cin.clear();
   	std::cin.ignore(100, '\n');
 
@@ -48,6 +48,12 @@ int main()
     //Set the x/y using the ascii character values of the first and second characters in their input
 	  x = ((int)choice[0] - 97);
   	y = ((int)choice[1] - 49);
+
+    if(x > 2 || y > 2)
+    {
+      std::cout << "Out of bounds, please try again. " << std::endl;
+      goto GET_INPUT;
+    }
 
     //If the space they chose was unoccupied, update the board with their choice
   	if(!board.spaceOccupied(x, y))
@@ -65,7 +71,7 @@ int main()
         goto RESTART;
       }
       //If there wasn't a win, toggle the player's turn. We have to do this after testWin() otherwise we won't know who won
-  		if(playerOneTurn) 
+  		if(playerOneTurn)
   			playerOneTurn = false;
   		else
   			playerOneTurn = true;

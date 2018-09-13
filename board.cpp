@@ -131,24 +131,6 @@ bool Board::testDiags()
     i--;
     j++;
   }
-  /*
-	//The next three if/else if statements are for testing each cell from top right to bottom left individually and incrementing the appropriate variables
-	if((*board[2][0]).value == 1) //a3
-		xCount++;
-	else if((*board[2][0]).value == 2)
-		oCount++;
-
-	if((*board[2][2]).value == 1) //b2
-		xCount++;
-	else if((*board[2][2]).value == 2)
-		oCount++;
-
-	if((*board[0][2]).value == 1) //c1
-		xCount++;
-	else if((*board[0][2]).value == 2)
-		oCount++;
-
-  */
 
 	//If there are there in a row of either x's or o's, return true
 	if(xCount == 3 || oCount == 3)
